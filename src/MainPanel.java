@@ -3,13 +3,14 @@ package src;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MainPanel extends JPanel {
 
     int colors;
-    public Color color1, color2;
+    public Color color1, color2, objColor1, objColor2;
     private int hue1 = 0;
     private int hue2 = 0;
     public int gradientWidth;
@@ -24,6 +25,8 @@ public class MainPanel extends JPanel {
     private float x1, y1, x2, y2;
 
     String red1, green1, blue1, red2, green2, blue2;
+    public Rectangle cube;
+
 
     public MainPanel(JFrame parent) {
         //temp
@@ -156,6 +159,11 @@ public class MainPanel extends JPanel {
             fade(hsbValues1, hsbValues2);
         }
 
+        if(cube!=null){
+            gp  = new GradientPaint((float) cube.getX(), (float) cube.getY(), objColor1, (float) (cube.getX()+cube.getWidth()), (float) (cube.getY()+cube.getHeight()), objColor2);
+            g2d.setPaint(gp);
+            g2d.fill(cube);
+        }
     }
 
     public void gradient() {
@@ -271,5 +279,10 @@ public class MainPanel extends JPanel {
 
     public void setColors(int colors) {
         this.colors = colors;
+    }
+
+    public void addCube() {
+        Rectangle cube = new Rectangle(gradientWidth/2, gradientHeight/2, 150, 150);
+        this.cube = cube;
     }
 }

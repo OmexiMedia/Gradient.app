@@ -275,6 +275,7 @@ public class MyMenuBar extends JMenuBar {
         configMenu.add(speedBtn);
         configMenu.add(fadePanel);
 
+        //Create things for AddMenu
          
 
         getRGB();
@@ -358,11 +359,12 @@ public class MyMenuBar extends JMenuBar {
                 }
             }
         });
-                // Add the menu to the menu bar
-        add(addMenu);
+                // Add the menus to the menu bar
         add(configMenu);
+        add(addMenu);
         setVisible(true);
     }
+
     public void toggleColorPanel(JPanel panel){
         if (panel.isVisible())
             panel.setVisible(false);

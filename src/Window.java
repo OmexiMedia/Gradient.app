@@ -11,6 +11,7 @@ public class Window extends JFrame {
         FlatMacDarkLaf.setup();
 
 
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setPreferredSize(screenSize);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
