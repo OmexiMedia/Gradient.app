@@ -1,5 +1,7 @@
 package src;
 
+import src.elements.Cube;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -14,34 +16,140 @@ public class MyMenuBar extends JMenuBar {
     JMenu configMenu;
 
     JMenuItem color1Btn;
-    JPanel color1Panel;
     JMenuItem color2Btn;
-    JPanel color2Panel;
+
     JMenuItem color3Btn;
-    JPanel color3Panel;
+
     JMenuItem color4Btn;
+
+    
+    //PANELS
+
+    JPanel backgroundPanel;
+    JPanel color1Panel;
+    JPanel rPanel1;
+    JPanel gPanel1;
+    JPanel bPanel1;
+
+    JPanel color2Panel;
+    JPanel rPanel2;
+    JPanel gPanel2;
+    JPanel bPanel2;
+
+    JPanel color3Panel;
+    JPanel rPanel3;
+    JPanel gPanel3;
+    JPanel bPanel3;
+
     JPanel color4Panel;
+    JPanel rPanel4;
+    JPanel gPanel4;
+    JPanel bPanel4;
+
+    JPanel objectPanel;
+    JPanel objColor1Panel;
+    JPanel rObj1;
+    JPanel gObj1;
+    JPanel bObj1;
+
+    JPanel objColor2Panel;
+    JPanel rObj2;
+    JPanel gObj2;
+    JPanel bObj2;
+
+    JPanel objColor3Panel;
+    JPanel rObj3;
+    JPanel gObj3;
+    JPanel bObj3;
+
+    JPanel objColor4Panel;
+    JPanel rObj4;
+    JPanel gObj4;
+    JPanel bObj4;
 
 
     JPanel speedPanel;
     JPanel fadePanel;
+    JPanel fadePanel1;
+    JPanel fadePanel2;
+    JPanel fadePanel3;
+    JPanel fadePanel4;
+
+    //LABELS
+
+    JLabel colorLabel1;
+    JLabel colorLabel2;
+    JLabel colorLabel3;
+    JLabel colorLabel4;
+    JLabel speedLabel;
+    JLabel rLabel1;
+    JLabel gLabel1;
+    JLabel bLabel1;
+    JLabel rLabel2;
+    JLabel gLabel2;
+    JLabel bLabel2;
+    JLabel rLabel3;
+    JLabel gLabel3;
+    JLabel bLabel3;
+    JLabel rLabel4;
+    JLabel gLabel4;
+    JLabel bLabel4;
+    JLabel fadeLabel1;
+    JLabel fadeLabel2;
+    JLabel fadeLabel3;
+    JLabel fadeLabel4;
+
+
+
+    //TEXTFIELDS
+
     JTextField rValue1;
     JTextField gValue1;
     JTextField bValue1;
     JTextField rValue2;
     JTextField gValue2;
     JTextField bValue2;
+    JTextField rValue3;
+    JTextField gValue3;
+    JTextField bValue3;
+    JTextField rValue4;
+    JTextField gValue4;
+    JTextField bValue4;
     JTextField speedValue;
+
+
+    //SLIDERS
+
     JSlider rSlider1;
     JSlider gSlider1;
     JSlider bSlider1;
     JSlider rSlider2;
     JSlider gSlider2;
     JSlider bSlider2;
+    JSlider rSlider3;
+    JSlider gSlider3;
+    JSlider bSlider3;
+    JSlider rSlider4;
+    JSlider gSlider4;
+    JSlider bSlider4;
     JSlider speedSlider;
+
+
+    //BUTTONS
+
     JMenuItem speedBtn;
+
+    //CHECKBOXES
     JCheckBox fadeCheckBox1;
     JCheckBox fadeCheckBox2;
+    JCheckBox fadeCheckBox3;
+    JCheckBox fadeCheckBox4;
+
+    //Add Menu
+    JPanel addPanel;
+    JPopupMenu objectMenu;
+
+
     public MyMenuBar(MainPanel mp) {
         // Create a menu bar
         this.mp = mp;
@@ -62,7 +170,34 @@ public class MyMenuBar extends JMenuBar {
         * JButton: Triangle
          */
 
+        addMenu.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                mp.cube = new Cube(0, 0, 400, 400, mp.gradientWidth, mp.gradientHeight, mp.color1, mp.color2, mp);
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        }
+        );
 
         /*
         * Config Menu content
@@ -92,6 +227,10 @@ public class MyMenuBar extends JMenuBar {
         *   * JCheckBox: Fade 3
         *   * JCheckBox: Fade 4
          */
+
+            //Important: configMenu.updateUI();
+
+
 
         JLabel backgroundLabel = new JLabel("Background");
         backgroundLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -158,40 +297,61 @@ public class MyMenuBar extends JMenuBar {
 
 
         // Create menu item's for configMenu
-        JPanel color1Panel = new JPanel();
-        JPanel rPanel1 = new JPanel();
-        JPanel gPanel1 = new JPanel();
-        JPanel bPanel1 = new JPanel();
 
-        JPanel color2Panel = new JPanel();
-        JPanel rPanel2 = new JPanel();
-        JPanel gPanel2 = new JPanel();
-        JPanel bPanel2 = new JPanel();
+        backgroundPanel = new JPanel();
+
+        color1Panel = new JPanel();
+
+        rPanel1 = new JPanel();
+
+        gPanel1 = new JPanel();
+
+        bPanel1 = new JPanel();
 
 
+        color2Panel = new JPanel();
 
-        color1Panel.setLayout(new BorderLayout());
-        rPanel1.setLayout(new BorderLayout());
-        gPanel1.setLayout(new BorderLayout());
-        bPanel1.setLayout(new BorderLayout());
+        rPanel2 = new JPanel();
 
-        color2Panel.setLayout(new BorderLayout());
-        rPanel2.setLayout(new BorderLayout());
-        gPanel2.setLayout(new BorderLayout());
-        bPanel2.setLayout(new BorderLayout());
+        gPanel2 = new JPanel();
 
-        speedPanel.setLayout(new BorderLayout());
-        fadePanel.setLayout(new BorderLayout());
+        bPanel2 = new JPanel();
 
-        JLabel colorLabel1 = new JLabel("Color 1");
-        JLabel colorLabel2 = new JLabel("Color 2");
-        JLabel speedLabel = new JLabel("Speed");
-        JLabel rLabel1 = new JLabel("Red: ");
-        JLabel gLabel1 = new JLabel("Green: ");
-        JLabel bLabel1 = new JLabel("Blue");
-        JLabel rLabel2 = new JLabel("Red: ");
-        JLabel gLabel2 = new JLabel("Green: ");
-        JLabel bLabel2 = new JLabel("Blue: ");
+        objectPanel = new JPanel();
+
+
+        backgroundPanel.setLayout(new BorderLayout());
+            color1Panel.setLayout(new BorderLayout());
+                rPanel1.setLayout(new BorderLayout());
+                gPanel1.setLayout(new BorderLayout());
+                bPanel1.setLayout(new BorderLayout());
+
+            color2Panel.setLayout(new BorderLayout());
+                rPanel2.setLayout(new BorderLayout());
+                gPanel2.setLayout(new BorderLayout());
+                bPanel2.setLayout(new BorderLayout());
+
+                speedPanel.setLayout(new BorderLayout());
+                fadePanel.setLayout(new BorderLayout());
+
+
+        colorLabel1 = new JLabel("Color 1");
+
+        colorLabel2 = new JLabel("Color 2");
+
+        speedLabel = new JLabel("Speed");
+
+        rLabel1 = new JLabel("Red: ");
+
+        gLabel1 = new JLabel("Green: ");
+
+        bLabel1 = new JLabel("Blue");
+
+        rLabel2 = new JLabel("Red: ");
+
+        gLabel2 = new JLabel("Green: ");
+
+        bLabel2 = new JLabel("Blue: ");
 
         rValue1 = new JTextField();
         gValue1 = new JTextField();
@@ -254,6 +414,12 @@ public class MyMenuBar extends JMenuBar {
         configMenu.add(backgroundLabel);
         configMenu.add(colorPanel);
 
+        //Temp
+
+        configMenu.add(backgroundPanel);
+
+
+        //Temp
         configMenu.add(color1Btn);
         configMenu.add(color2Btn);
         if (mp.colors == 3){
@@ -276,7 +442,7 @@ public class MyMenuBar extends JMenuBar {
         configMenu.add(fadePanel);
 
         //Create things for AddMenu
-         
+
 
         getRGB();
         getSpeed();
@@ -363,6 +529,10 @@ public class MyMenuBar extends JMenuBar {
         add(configMenu);
         add(addMenu);
         setVisible(true);
+    }
+
+    private void makeBgPanel() {
+
     }
 
     public void toggleColorPanel(JPanel panel){

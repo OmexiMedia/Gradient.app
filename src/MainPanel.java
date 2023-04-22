@@ -1,5 +1,7 @@
 package src;
 
+import src.elements.Cube;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -24,8 +26,7 @@ public class MainPanel extends JPanel {
     public MyMenuBar menuBar;
     private float x1, y1, x2, y2;
 
-    String red1, green1, blue1, red2, green2, blue2;
-    public Rectangle cube;
+    public Cube cube;
 
 
     public MainPanel(JFrame parent) {
@@ -126,8 +127,8 @@ public class MainPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        gradientWidth = this.parent.getWidth();
-        gradientHeight = this.parent.getHeight();
+        gradientWidth = getGradientWidth();
+        gradientHeight = getGradientHeight();
         this.menuBar.getRGB();
         //this.menuBar.getSpeed();
 
@@ -143,7 +144,16 @@ public class MainPanel extends JPanel {
         g2d.setPaint(gp);
 
         // Fill the background with the gradient paint
-        g2d.fillRect(0, 0, gradientWidth, gradientHeight);
+        Rectangle bg = new Rectangle(0, 0, getGradientWidth(), getGradientHeight());
+
+        g2d.fillRect(bg.x, bg.y, bg.width, bg.height);
+
+
+        if (this.cube!=null){
+            g2d = cube.cubeG2d(g2d);
+            g2d.fillRect(cube.x, cube.y, cube.width, cube.height);
+            System.out.println("Cube painted");
+        }
 
         //Colorhandling
         float[] hsbValues1 = new float[3];
@@ -151,20 +161,29 @@ public class MainPanel extends JPanel {
         Color.RGBtoHSB(color1.getRed(), color1.getGreen(), color1.getBlue(), hsbValues1);
         hue1 = (int) (hsbValues1[0] * 360);
         Color.RGBtoHSB(color2.getRed(), color2.getGreen(), color2.getBlue(), hsbValues2);
+
         hue2 = (int) (hsbValues2[0] * 360);
+
+        /*
         System.out.println("Hue1: " + hue1);
         System.out.println("Hue2: " + hue2);
-
+*/
         if (fade1 || fade2) {
             fade(hsbValues1, hsbValues2);
         }
 
-        if(cube!=null){
-            gp  = new GradientPaint((float) cube.getX(), (float) cube.getY(), objColor1, (float) (cube.getX()+cube.getWidth()), (float) (cube.getY()+cube.getHeight()), objColor2);
-            g2d.setPaint(gp);
-            g2d.fill(cube);
-        }
+
     }
+
+    private int getGradientWidth() {
+        gradientWidth = this.parent.getWidth();
+        return gradientWidth;
+    }
+    private int getGradientHeight() {
+        gradientHeight = this.parent.getHeight();
+        return gradientHeight;
+    }
+
 
     public void gradient() {
 
@@ -281,8 +300,4 @@ public class MainPanel extends JPanel {
         this.colors = colors;
     }
 
-    public void addCube() {
-        Rectangle cube = new Rectangle(gradientWidth/2, gradientHeight/2, 150, 150);
-        this.cube = cube;
-    }
 }
