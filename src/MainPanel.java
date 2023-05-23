@@ -22,6 +22,8 @@ public class MainPanel extends JPanel {
     public String name = "Main Panel";
     public boolean fade1;
     public boolean fade2;
+    public boolean objActive;
+    public boolean bgActive;
     JFrame parent;
     public MyMenuBar menuBar;
     private float x1, y1, x2, y2;
@@ -35,6 +37,7 @@ public class MainPanel extends JPanel {
         color2 = new Color(252, 138, 136);
         colors = 2;
         sleepTime = 1;
+        bgActive = true;
 
         //Setup
         setup();
@@ -152,7 +155,9 @@ public class MainPanel extends JPanel {
         if (this.cube!=null){
             g2d = cube.cubeG2d(g2d);
             g2d.fillRect(cube.x, cube.y, cube.width, cube.height);
-            System.out.println("Cube painted");
+            objActive = true;
+        }else {
+
         }
 
         //Colorhandling
@@ -186,26 +191,18 @@ public class MainPanel extends JPanel {
 
 
     public void gradient() {
-
+        //To Do:
+        //      while(bgActive)
         while (true) {
-
-
-            try {
-                // Perform the task here
-
-                Thread.sleep(sleepTime);
-
+            if (bgActive){
                 if ((x1 < gradientWidth) && (y1 == 0)) {
                     x1++;
                     x2--;
                     repaint();
-                    // Sleep for 1-10 milliseconds
-
                 } else if ((x1 == gradientWidth) && (y1 < gradientHeight)) {
                     y1++;
                     y2--;
                     repaint();
-                    // Sleep for 1-10 milliseconds
                 } else if ((y1 == gradientHeight) && (x1 > 0)) {
                     x1--;
                     x2++;
@@ -214,32 +211,38 @@ public class MainPanel extends JPanel {
                     y1--;
                     y2++;
                     repaint();
-                    // Sleep for 1-10 milliseconds
-                } else {
-                    /*
-                     if (!((x1<gradientWidth)&&(x1>0)&&(x2<gradientWidth)&&(x2>0))){
-                        if (!(x1<gradientWidth)){
-                            x1--;
-                            System.out.println("x1<width");
-                        } else if (!(x1>0)) {
-                            x1++;
-                            System.out.println("x1<0");
-                        } else if (!(x2<gradientWidth)) {
-                            x2--;
-                            System.out.println("x2>width");
-                        } else if (!(x2>0)) {
-                            x2++;
-                            System.out.println("x2<0");
-                        }
-
-                    }
-
-                     */
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            }
+
+
+        if (objActive){
+
+            if ((cube.gx1 < cube.width+cube.xnull) && (cube.gy1 == cube.ynull)) {
+                cube.gx1++;
+                cube.gx2--;
+                repaint();
+            } else if ((cube.gx1 == cube.width+cube.xnull) && (cube.gy1 < cube.height+cube.ynull)) {
+                cube.gy1++;
+                cube.gy2--;
+                repaint();
+            } else if ((cube.gy1 == cube.height+cube.ynull) && (cube.gx1+cube.width > cube.xnull)) {
+                cube.gx1--;
+                cube.gx2++;
+                repaint();
+            } else if ((cube.gx1+cube.width == cube.xnull) && (cube.gy1+cube.height>cube.ynull)){
+                cube.gy1--;
+                cube.gy2++;
+                repaint();
+                repaint();
             }
         }
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
     }
 
     public void fade(float[] hsbValues1, float[] hsbValues2) {

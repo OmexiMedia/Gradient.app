@@ -162,6 +162,9 @@ public class MyMenuBar extends JMenuBar {
         configMenu = new JMenu("Config");
         configMenu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
+        add(configMenu);
+        add(addMenu);
+
         /*
         * Add Menu content
         * JLabel: Objects
@@ -178,8 +181,12 @@ public class MyMenuBar extends JMenuBar {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                mp.cube = new Cube(0, 0, 400, 400, mp.gradientWidth, mp.gradientHeight, mp.color1, mp.color2, mp);
-
+                int size = 400;
+                Color color3, color4;
+                color3 = new Color(255, 255, 255, 255);
+                color4 = new Color(0, 0, 0, 255);
+                mp.cube = new Cube(0, 0, size, size, mp.gradientWidth, mp.gradientHeight, color3, color4, mp);
+                mp.cube.toggleSpin("left");
             }
 
             @Override
@@ -526,8 +533,7 @@ public class MyMenuBar extends JMenuBar {
             }
         });
                 // Add the menus to the menu bar
-        add(configMenu);
-        add(addMenu);
+
         setVisible(true);
     }
 
